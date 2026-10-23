@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlaceLAB Inc. — 주식회사 플레이스랩</title>
+<meta name="description" content="PlaceLAB Inc. (주식회사 플레이스랩) — application software development, advertising, interior design and product design. Chuncheon, Republic of Korea.">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="logo/png/placelab-symbol-180.png">
+<style>
+  :root { --ink:#1B1D22; --m:#5F6470; --line:#E6E8EC; --bg:#F7F8FA; --acc:#fe6d66; --acc2:#feaf7c; }
+  * { box-sizing:border-box }
+  html { scroll-behavior:smooth }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Malgun Gothic",sans-serif; color:var(--ink); background:#fff; line-height:1.7; word-break:keep-all; overflow-wrap:anywhere }
+  a { color:inherit }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 20px }
+  html[data-lang="ko"] [lang="en"], html[data-lang="en"] [lang="ko"] { display:none !important }
+
+  header.top { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.95); backdrop-filter:blur(6px); border-bottom:1px solid var(--line) }
+  header.top .wrap { display:flex; align-items:center; gap:16px; height:64px }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; text-decoration:none; letter-spacing:-.2px; white-space:nowrap }
+  .brand .mark { width:30px; height:30px; border-radius:9px; background:linear-gradient(140deg,var(--acc),var(--acc2)); display:grid; place-items:center; color:#fff; font-size:15px; font-weight:900 }
+  .brand b { color:var(--acc) }
+  nav.menu { display:flex; gap:22px; margin-left:auto }
+  nav.menu a { color:var(--m); text-decoration:none; font-weight:600; font-size:14px }
+  nav.menu a:hover { color:var(--ink) }
+  .lang-btn { border:1px solid var(--line); background:#fff; font-weight:700; font-size:13px; padding:6px 12px; border-radius:999px; cursor:pointer }
+  @media (max-width:780px) { nav.menu { display:none } .lang-btn { margin-left:auto } }
+
+  .hero { padding:96px 0 88px; background:radial-gradient(1200px 400px at 85% -10%, rgba(254,175,124,.25), transparent 60%), var(--bg); border-bottom:1px solid var(--line) }
+  .eyebrow { color:var(--acc); font-weight:800; font-size:13px; letter-spacing:2px; text-transform:uppercase }
+  .hero h1 { font-size:clamp(30px,5.2vw,52px); line-height:1.2; margin:12px 0 18px; letter-spacing:-.5px }
+  .hero p { font-size:17.5px; color:var(--m); max-width:680px; margin:0 }
+  .btns { margin-top:30px; display:flex; gap:10px; flex-wrap:wrap }
+  .btn { display:inline-block; padding:12px 20px; border-radius:12px; font-weight:700; text-decoration:none; font-size:15px }
+  .btn.primary { background:var(--ink); color:#fff } .btn.ghost { border:1px solid var(--line); background:#fff }
+
+  section.block { padding:76px 0 }
+  section.alt { background:var(--bg); border-top:1px solid var(--line); border-bottom:1px solid var(--line) }
+  h2 { font-size:28px; margin:8px 0 10px; letter-spacing:-.3px }
+  .sub { color:var(--m); margin:0 0 34px; max-width:700px }
+  .grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) }
+  .card { background:#fff; border:1px solid var(--line); border-radius:18px; padding:24px }
+  .card .ic { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; font-size:22px; background:#FFF1EC; margin-bottom:14px }
+  .card h3 { margin:0 0 6px; font-size:17.5px }
+  .card p { margin:0; color:var(--m); font-size:14.5px }
+  .card ul { margin:10px 0 0; padding-left:18px; color:var(--m); font-size:14px }
+
+  .about { display:grid; gap:40px; grid-template-columns:1fr 1fr; align-items:start }
+  @media (max-width:860px) { .about { grid-template-columns:1fr } }
+  .about p { color:var(--m); margin:0 0 14px }
+  .values { display:grid; gap:12px }
+  .value { display:flex; gap:14px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px }
+  .value b { display:block } .value span { color:var(--m); font-size:14px }
+
+  .work { display:grid; gap:28px; grid-template-columns:1.1fr 1fr; align-items:center; background:#fff; border:1px solid var(--line); border-radius:22px; padding:28px }
+  @media (max-width:860px) { .work { grid-template-columns:1fr } }
+  .work .head { display:flex; gap:14px; align-items:center; margin-bottom:10px }
+  .work .head img { width:60px; height:60px; border-radius:15px }
+  .work h3 { margin:0; font-size:22px } .tag { color:var(--m); font-size:13px }
+  .work p { color:var(--m); margin:8px 0 0 }
+  .shots { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+  .shots img { width:100%; border-radius:12px; border:1px solid var(--line) }
+
+  dl.info { display:grid; grid-template-columns:170px 1fr; gap:10px 18px; margin:0; background:#fff; border:1px solid var(--line); border-radius:18px; padding:26px }
+  dl.info dt { color:var(--m); font-weight:700 } dl.info dd { margin:0 }
+  @media (max-width:560px) { dl.info { grid-template-columns:1fr } dl.info dd { margin-bottom:10px } }
+
+  footer { background:var(--ink); color:#B9BDC6; padding:34px 0; font-size:13.5px }
+  footer .links a { color:#fff; margin-right:18px; text-decoration:none }
+  footer p { margin:12px 0 0 }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="logo/placelab-wordmark.svg" alt="PlaceLAB Inc." height="28"></a>
+    <nav class="menu">
+      <a href="#about"><span lang="ko">회사 소개</span><span lang="en">About</span></a>
+      <a href="#business"><span lang="ko">사업 분야</span><span lang="en">Business</span></a>
+      <a href="#work"><span lang="ko">서비스</span><span lang="en">Products</span></a>
+      <a href="#company"><span lang="ko">회사 정보</span><span lang="en">Company</span></a>
+      <a href="#contact"><span lang="ko">문의</span><span lang="en">Contact</span></a>
+    </nav>
+    <button class="lang-btn" id="langBtn" type="button">EN</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">PlaceLAB Inc.</div>
+    <h1 lang="ko">디지털과 공간,<br>사람이 머무는 경험을 설계합니다</h1>
+    <h1 lang="en">Designing experiences<br>for digital products and spaces</h1>
+    <p lang="ko">주식회사 플레이스랩은 응용 소프트웨어 개발, 광고 대행, 인테리어 디자인, 제품 디자인을 하는 강원도 춘천의 기업입니다.</p>
+    <p lang="en">PlaceLAB Inc. is a company based in Chuncheon, Republic of Korea, working in application software development, advertising, interior design and product design.</p>
+    <div class="btns">
+      <a class="btn primary" href="#business"><span lang="ko">사업 분야 보기</span><span lang="en">Our business</span></a>
+      <a class="btn ghost" href="#contact"><span lang="ko">문의하기</span><span lang="en">Contact us</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="wrap about">
+    <div>
+      <div class="eyebrow">About</div>
+      <h2><span lang="ko">회사 소개</span><span lang="en">About us</span></h2>
+      <p lang="ko">플레이스랩(PlaceLAB)은 '장소(Place)'와 '실험실(LAB)'을 합친 이름입니다. 사람들이 매일 쓰는 앱 화면부터 머무는 공간, 손에 쥐는 제품까지 — 사용하는 사람의 경험을 중심에 두고 기획하고 만듭니다.</p>
+      <p lang="en">The name PlaceLAB combines "place" and "lab". From the app screens people use every day to the spaces they stay in and the products they hold, we plan and build around the experience of the people who use them.</p>
+      <p lang="ko">2026년 6월에 설립되었으며, 자체 서비스로 외국인 한국어 학습 앱 <b>TAPA TOPIK</b>을 개발·운영하고 있습니다.</p>
+      <p lang="en">Founded in June 2026, we develop and operate our own service, <b>TAPA TOPIK</b>, a Korean language learning app for international learners.</p>
+    </div>
+    <div class="values">
+      <div class="value"><span style="font-size:22px">🧭</span><div><b lang="ko">사용자 중심</b><b lang="en">User-centered</b><span lang="ko">쓰는 사람이 쉽게 이해하고 오래 쓰는 결과물을 만듭니다.</span><span lang="en">We build things people understand easily and keep using.</span></div></div>
+      <div class="value"><span style="font-size:22px">🧪</span><div><b lang="ko">실험과 개선</b><b lang="en">Experiment and improve</b><span lang="ko">작게 만들고, 확인하고, 계속 고쳐 나갑니다.</span><span lang="en">We start small, test, and keep improving.</span></div></div>
+      <div class="value"><span style="font-size:22px">🤝</span><div><b lang="ko">디자인과 기술의 결합</b><b lang="en">Design meets technology</b><span lang="ko">디지털과 공간·제품 디자인을 한 팀에서 함께 다룹니다.</span><span lang="en">Digital, spatial and product design handled by one team.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="business">
+  <div class="wrap">
+    <div class="eyebrow">Business</div>
+    <h2><span lang="ko">사업 분야</span><span lang="en">What we do</span></h2>
+    <p class="sub" lang="ko">정보통신업과 전문·과학·기술서비스업 분야에서 아래 네 가지 사업을 합니다.</p>
+    <p class="sub" lang="en">We work in information &amp; communication and professional, scientific &amp; technical services across four areas.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">📱</div>
+        <h3 lang="ko">응용 소프트웨어 개발·공급</h3><h3 lang="en">Application software</h3>
+        <p lang="ko">모바일 앱과 웹 서비스를 기획·디자인·개발하고 운영합니다.</p>
+        <p lang="en">Planning, design, development and operation of mobile apps and web services.</p>
+        <ul lang="ko"><li>Android · iOS 앱</li><li>웹 서비스 · 관리자 도구</li><li>다국어 서비스 운영</li></ul>
+        <ul lang="en"><li>Android and iOS apps</li><li>Web services and admin tools</li><li>Multilingual service operation</li></ul></div>
+      <div class="card"><div class="ic">📣</div>
+        <h3 lang="ko">광고 대행</h3><h3 lang="en">Advertising</h3>
+        <p lang="ko">브랜드와 서비스를 알리는 광고·마케팅을 기획하고 운영합니다.</p>
+        <p lang="en">Planning and running advertising and marketing for brands and services.</p>
+        <ul lang="ko"><li>온라인·SNS 광고</li><li>홍보 콘텐츠 제작</li><li>앱 스토어 마케팅</li></ul>
+        <ul lang="en"><li>Online and social media ads</li><li>Promotional content</li><li>App store marketing</li></ul></div>
+      <div class="card"><div class="ic">🛋️</div>
+        <h3 lang="ko">인테리어 디자인</h3><h3 lang="en">Interior design</h3>
+        <p lang="ko">사람이 머무는 공간을 용도와 브랜드에 맞게 디자인합니다.</p>
+        <p lang="en">Designing spaces that fit their purpose and brand.</p>
+        <ul lang="ko"><li>상업·업무 공간</li><li>공간 기획 · 설계</li></ul>
+        <ul lang="en"><li>Commercial and office spaces</li><li>Space planning and design</li></ul></div>
+      <div class="card"><div class="ic">📦</div>
+        <h3 lang="ko">제품 디자인</h3><h3 lang="en">Product design</h3>
+        <p lang="ko">쓰기 편하고 브랜드를 담은 제품을 디자인합니다.</p>
+        <p lang="en">Designing products that are easy to use and carry the brand.</p>
+        <ul lang="ko"><li>제품 기획 · 디자인</li><li>패키지 · 브랜드 디자인</li></ul>
+        <ul lang="en"><li>Product planning and design</li><li>Package and brand design</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="eyebrow">Products</div>
+    <h2><span lang="ko">자체 서비스</span><span lang="en">Our products</span></h2>
+    <p class="sub" lang="ko">플레이스랩이 직접 개발하고 운영하는 서비스입니다.</p>
+    <p class="sub" lang="en">Services we develop and operate ourselves.</p>
+    <div class="work">
+      <div>
+        <div class="head"><img src="img/icon.png" alt="TAPA TOPIK"><div><h3>TAPA TOPIK</h3><span class="tag" lang="ko">외국인을 위한 한국어능력시험(TOPIK) 학습 앱</span><span class="tag" lang="en">TOPIK (Korean proficiency test) learning app</span></div></div>
+        <p lang="ko">한국에서 공부하고 일하려는 외국인이 자기 나라 언어로 TOPIK을 준비하는 앱입니다. 실제 시험과 같은 문제와 모의시험, AI 쓰기 첨삭, 단어 학습을 몽골어·우크라이나어·우즈베크어·따갈로그어·인도네시아어·일본어·중국어·태국어·베트남어·영어로 제공합니다.</p>
+        <p lang="en">An app that helps people who want to study and work in Korea prepare for TOPIK in their own language — exam-style questions, mock exams, AI writing feedback and vocabulary, available in Mongolian, Ukrainian, Uzbek, Tagalog, Indonesian, Japanese, Chinese, Thai, Vietnamese and English.</p>
+        <p><a class="btn ghost" style="margin-top:6px" href="https://play.google.com/store/search?q=TAPA%20TOPIK&amp;c=apps">Google Play</a></p>
+      </div>
+      <div class="shots">
+        <img src="img/01_home.jpg" alt="TAPA TOPIK home">
+        <img src="img/04_questions.jpg" alt="TAPA TOPIK questions">
+        <img src="img/03_writing_ai.jpg" alt="TAPA TOPIK AI writing">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="company">
+  <div class="wrap">
+    <div class="eyebrow">Company</div>
+    <h2><span lang="ko">회사 정보</span><span lang="en">Company information</span></h2>
+    <dl class="info" style="margin-top:24px">
+      <dt><span lang="ko">회사명</span><span lang="en">Company name</span></dt><dd><span lang="ko">주식회사 플레이스랩 (PlaceLAB Inc.)</span><span lang="en">PlaceLAB Inc. (주식회사 플레이스랩)</span></dd>
+      <dt><span lang="ko">대표이사</span><span lang="en">CEO</span></dt><dd><span lang="ko">이수영</span><span lang="en">Soo Young Lee</span></dd>
+      <dt><span lang="ko">설립일</span><span lang="en">Founded</span></dt><dd><span lang="ko">2026년 6월 25일</span><span lang="en">June 25, 2026</span></dd>
+      <dt><span lang="ko">사업자등록번호</span><span lang="en">Business reg. no.</span></dt><dd>861-86-03653</dd>
+      <dt><span lang="ko">업태 · 종목</span><span lang="en">Business</span></dt><dd><span lang="ko">정보통신업, 전문·과학 및 기술서비스업 · 응용 소프트웨어 개발 및 공급업, 광고 대행업, 인테리어 디자인업, 제품 디자인업</span><span lang="en">Information &amp; communication; professional, scientific &amp; technical activities — application software publishing, advertising agency, interior design, product design</span></dd>
+      <dt><span lang="ko">주소</span><span lang="en">Address</span></dt><dd><span lang="ko">강원특별자치도 춘천시 효자로 121, 4층 에이24호</span><span lang="en">4F A-24, 121 Hyoja-ro, Chuncheon-si, Gangwon-do, Republic of Korea</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2><span lang="ko">문의</span><span lang="en">Contact us</span></h2>
+    <p class="sub" lang="ko">프로젝트 의뢰, 제휴, 서비스 이용 문의는 이메일로 보내 주세요.</p>
+    <p class="sub" lang="en">For project requests, partnerships or service support, please email us.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">✉️</div><h3 lang="ko">이메일</h3><h3 lang="en">Email</h3><p><a href="mailto:dlabint@dlabint.co.kr">dlabint@dlabint.co.kr</a></p></div>
+      <div class="card"><div class="ic">📍</div><h3 lang="ko">주소</h3><h3 lang="en">Office</h3><p lang="ko">강원특별자치도 춘천시 효자로 121, 4층 에이24호</p><p lang="en">4F A-24, 121 Hyoja-ro, Chuncheon-si, Gangwon-do, Republic of Korea</p></div>
+      <div class="card"><div class="ic">🛟</div><h3 lang="ko">TAPA TOPIK 고객 지원</h3><h3 lang="en">TAPA TOPIK support</h3><p><a href="privacy.html"><span lang="ko">개인정보처리방침</span><span lang="en">Privacy Policy</span></a> · <a href="delete-account.html"><span lang="ko">계정 삭제</span><span lang="en">Delete account</span></a></p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="logo/placelab-logo-white.svg" alt="PlaceLAB Inc. 주식회사 플레이스랩" height="54" style="display:block;margin-bottom:18px">
+    <div class="links">
+      <a href="privacy.html"><span lang="ko">개인정보처리방침</span><span lang="en">Privacy Policy</span></a>
+      <a href="delete-account.html"><span lang="ko">계정 삭제</span><span lang="en">Delete account</span></a>
+      <a href="mailto:dlabint@dlabint.co.kr"><span lang="ko">문의</span><span lang="en">Contact</span></a>
+    </div>
+    <p><span lang="ko">주식회사 플레이스랩 · 대표이사 이수영 · 사업자등록번호 861-86-03653 · 강원특별자치도 춘천시 효자로 121, 4층 에이24호</span><span lang="en">PlaceLAB Inc. · CEO Soo Young Lee · Business reg. no. 861-86-03653 · 4F A-24, 121 Hyoja-ro, Chuncheon-si, Gangwon-do, Republic of Korea</span></p>
+    <p>© 2026 PlaceLAB Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // 언어: ?lang=en / ?lang=ko, 없으면 브라우저 언어 (한국어가 아니면 영어)
+  var html = document.documentElement, btn = document.getElementById("langBtn");
+  function setLang(l) { html.dataset.lang = l; html.lang = l; btn.textContent = l === "ko" ? "EN" : "한국어"; }
+  var q = new URLSearchParams(location.search).get("lang");
+  setLang(q === "en" || q === "ko" ? q : ((navigator.language || "ko").toLowerCase().indexOf("ko") === 0 ? "ko" : "en"));
+  btn.onclick = function () { setLang(html.dataset.lang === "ko" ? "en" : "ko"); };
+</script>
+</body>
+</html>
