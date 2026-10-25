@@ -11,18 +11,20 @@
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/logo/png/placelab-symbol-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="/"><img src="/logo/placelab-wordmark.svg" alt="PlaceLAB Inc."></a>
+    <a class="brand" href="/"><img src="/logo/placelab-wordmark-white.svg" alt="PlaceLAB Inc."></a>
     <button class="burger" id="burger" type="button" aria-label="Menu">☰</button>
     <nav class="menu" id="menu"><div class="item"><a href="/about/"><span lang="ko">회사소개</span><span lang="en">About</span></a></div><div class="item"><a href="/business/"><span lang="ko">사업분야</span><span lang="en">Business</span></a></div><div class="item"><a href="/tapa-topik/"><span lang="ko">서비스</span><span lang="en">Products</span></a><div class="sub"><a href="/tapa-topik/">TAPA TOPIK</a><a href="/jeongi/"><span lang="ko">전기로운생활</span><span lang="en">Jeongi Life</span></a></div></div><div class="item on"><a href="/notice/"><span lang="ko">고객지원</span><span lang="en">Support</span></a><div class="sub"><a href="/notice/"><span lang="ko">공지사항</span><span lang="en">Notices</span></a><a href="/privacy/"><span lang="ko">개인정보처리방침</span><span lang="en">Privacy Policy</span></a><a href="/terms/"><span lang="ko">이용약관</span><span lang="en">Terms of Service</span></a><a href="/delete-account/"><span lang="ko">계정 삭제 안내</span><span lang="en">Account deletion</span></a></div></div><div class="item"><a href="/contact/"><span lang="ko">문의하기</span><span lang="en">Contact</span></a></div><div class="item"><button class="lang-btn" id="langBtn" type="button">EN</button></div></nav>
   </div>
 </header>
 <main>
-<section class="page-head"><div class="wrap"><div class="eyebrow">Support</div><h1 lang="ko">계정 삭제 안내</h1><h1 lang="en">Account deletion</h1><p lang="ko">서비스별 계정과 데이터 삭제 방법입니다.</p><p lang="en">How to delete your account and data for each service.</p></div></section>
+<section class="page-head"><div class="wrap"><div class="eyebrow">Support</div><h1 lang="ko">계정 삭제 안내</h1><h1 lang="en">Account deletion</h1><p lang="ko">서비스별 계정과 데이터 삭제 방법입니다.</p><p lang="en">How to delete your account and data for each service.</p></div></section><div class="tape-solo" aria-hidden="true"><div class="tape t1"><div class="track"><span>place lab.</span><span class='star'>✦</span><span>App &amp; Software</span><span class='star'>✦</span><span>Advertising</span><span class='star'>✦</span><span>Interior</span><span class='star'>✦</span><span>Product</span><span class='star'>✦</span><span>place lab.</span><span class='star'>✦</span><span>App &amp; Software</span><span class='star'>✦</span><span>Advertising</span><span class='star'>✦</span><span>Interior</span><span class='star'>✦</span><span>Product</span><span class='star'>✦</span><span>place lab.</span><span class='star'>✦</span><span>App &amp; Software</span><span class='star'>✦</span><span>Advertising</span><span class='star'>✦</span><span>Interior</span><span class='star'>✦</span><span>Product</span><span class='star'>✦</span><span>place lab.</span><span class='star'>✦</span><span>App &amp; Software</span><span class='star'>✦</span><span>Advertising</span><span class='star'>✦</span><span>Interior</span><span class='star'>✦</span><span>Product</span><span class='star'>✦</span></div></div></div>
 <section class="block"><div class="wrap doc">
 <div lang="ko">
 <h2>TAPA TOPIK</h2>
@@ -52,7 +54,7 @@
 </main>
 <footer>
   <div class="wrap">
-    <img class="logo" src="/logo/placelab-logo-white.svg" alt="PlaceLAB Inc. 주식회사 플레이스랩">
+    <div class="bigword">place<b>lab.</b></div>
     <div class="links"><a href="/privacy/"><span lang="ko">개인정보처리방침</span><span lang="en">Privacy Policy</span></a><a href="/terms/"><span lang="ko">이용약관</span><span lang="en">Terms of Service</span></a><a href="/contact/"><span lang="ko">문의하기</span><span lang="en">Contact</span></a></div>
     <p><span lang="ko">주식회사 플레이스랩 · 대표이사 이수영 · 사업자등록번호 861-86-03653<br>강원특별자치도 춘천시 효자로 121, 4층 에이24호 · placelab@placelabinc.com</span><span lang="en">PlaceLAB Inc. · CEO Soo Young Lee · Business registration no. 861-86-03653<br>4F A-24, 121 Hyoja-ro, Chuncheon-si, Gangwon-do, Republic of Korea · placelab@placelabinc.com</span></p>
     <p>© 2026 PlaceLAB Inc. All rights reserved.</p>
@@ -67,6 +69,21 @@
   setLang(q === "en" || q === "ko" ? q : saved || "en");
   btn.onclick = function () { setLang(html.dataset.lang === "ko" ? "en" : "ko"); };
   document.getElementById("burger").onclick = function () { document.getElementById("menu").classList.toggle("open"); };
+  // 스크롤하면 나타남
+  var rvs = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+    rvs.forEach(function (el) { io.observe(el); });
+  } else rvs.forEach(function (el) { el.classList.add("in"); });
+  // 첫 화면 단어 돌리기
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".rot").forEach(function (r) {
+    var w = r.getAttribute("data-words").split("|"), i = 0;
+    if (!still) setInterval(function () { i = (i + 1) % w.length; r.innerHTML = "<span>" + w[i] + "</span>"; }, 2200);
+  });
+  // 사업분야 좌우 넘기기 버튼
+  var hs = document.getElementById("hs");
+  document.querySelectorAll("[data-hs]").forEach(function (b) { b.onclick = function () { hs.scrollBy({ left: Number(b.getAttribute("data-hs")) * 380, behavior: "smooth" }); }; });
 </script>
 </body>
 </html>
