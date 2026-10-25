@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko" data-lang="ko">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>사업분야 | PlaceLAB Inc.</title>
+<title>Business | PlaceLAB Inc.</title>
 <meta name="description" content="PlaceLAB Inc. business areas: app & software development, advertising & marketing, interior design, product design.">
 <meta property="og:title" content="Business | PlaceLAB Inc.">
 <meta property="og:description" content="PlaceLAB Inc. business areas: app & software development, advertising & marketing, interior design, product design.">
@@ -54,7 +54,8 @@
   function setLang(l) { html.dataset.lang = l; html.lang = l; btn.textContent = l === "ko" ? "EN" : "한국어"; try { localStorage.setItem("pl_lang", l); } catch (e) {} }
   var q = new URLSearchParams(location.search).get("lang"), saved = null;
   try { saved = localStorage.getItem("pl_lang"); } catch (e) {}
-  setLang(q === "en" || q === "ko" ? q : saved || ((navigator.language || "ko").toLowerCase().indexOf("ko") === 0 ? "ko" : "en"));
+  // 기본은 영어 — ?lang=ko 또는 한국어 버튼으로 바꾼 사람은 그 선택을 기억
+  setLang(q === "en" || q === "ko" ? q : saved || "en");
   btn.onclick = function () { setLang(html.dataset.lang === "ko" ? "en" : "ko"); };
   document.getElementById("burger").onclick = function () { document.getElementById("menu").classList.toggle("open"); };
 </script>
