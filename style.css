@@ -121,6 +121,7 @@ a.card { text-decoration:none; display:block }
 .prod:hover { transform:translateY(-6px) }
 .prod.tapa { background:linear-gradient(150deg,#FF5A4E 0%,#FF9A6B 100%); color:#fff }
 .prod.jeongi { background:#0D0E09; color:#fff; border:1px solid #2A2B1E }
+.prod.hurga { background:linear-gradient(150deg,#05625D 0%,#0B8C83 65%,#2BC4B0 100%); color:#fff }
 .prod.jeongi::after { content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(245,230,20,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(245,230,20,.06) 1px, transparent 1px); background-size:28px 28px; pointer-events:none }
 .prod .top { display:flex; align-items:center; gap:14px; position:relative; z-index:1 }
 .prod .top img { width:64px; height:64px; border-radius:16px; box-shadow:0 10px 24px rgba(0,0,0,.25) }

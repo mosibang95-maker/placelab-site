@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="gWool" cx="35%" cy="28%" r="78%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F3F1F7"/><stop offset="1" stop-color="#CBC5DA"/></radialGradient>
+    <radialGradient id="gSkin" cx="38%" cy="28%" r="82%"><stop offset="0" stop-color="#FFF3EB"/><stop offset=".6" stop-color="#F7D6C3"/><stop offset="1" stop-color="#DDAA90"/></radialGradient>
+    <radialGradient id="gShadow"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g id="lamb">
+    <ellipse cx="100" cy="188" rx="58" ry="9" fill="url(#gShadow)"/>
+    <rect x="74" y="150" width="20" height="34" rx="10" fill="url(#gSkin)"/>
+    <rect x="106" y="150" width="20" height="34" rx="10" fill="url(#gSkin)"/>
+    <circle cx="100" cy="142" r="44" fill="url(#gWool)"/>
+    <circle cx="64" cy="134" r="22" fill="url(#gWool)"/>
+    <circle cx="136" cy="134" r="22" fill="url(#gWool)"/>
+    <circle cx="100" cy="86" r="50" fill="url(#gWool)"/>
+    <circle cx="70" cy="58" r="24" fill="url(#gWool)"/>
+    <circle cx="100" cy="46" r="26" fill="url(#gWool)"/>
+    <circle cx="130" cy="58" r="24" fill="url(#gWool)"/>
+    <circle cx="58" cy="94" r="22" fill="url(#gWool)"/>
+    <circle cx="142" cy="94" r="22" fill="url(#gWool)"/>
+    <ellipse cx="42" cy="114" rx="16" ry="8" transform="rotate(-25 42 114)" fill="url(#gSkin)"/>
+    <ellipse cx="158" cy="114" rx="16" ry="8" transform="rotate(25 158 114)" fill="url(#gSkin)"/>
+    <g transform="translate(20 8) scale(1.6)" fill="none" stroke-linecap="round">
+      <path d="M24 43.75 C16 48.75 7 39.75 13 29.75 C20 18.75 38 25.75 46 37.75" stroke="#0B8C83" stroke-width="8.5"/>
+      <path d="M76 43.75 C84 48.75 93 39.75 87 29.75 C80 18.75 62 25.75 54 37.75" stroke="#0B8C83" stroke-width="8.5"/>
+      <path d="M15 28.5 C21 21 34 24 42 33" stroke="#fff" stroke-opacity=".38" stroke-width="2.4"/>
+      <path d="M85 28.5 C79 21 66 24 58 33" stroke="#fff" stroke-opacity=".38" stroke-width="2.4"/>
+    </g>
+    <ellipse cx="100" cy="108" rx="36" ry="31" fill="url(#gSkin)"/>
+    <circle cx="100" cy="76" r="15" fill="url(#gWool)"/>
+    <ellipse cx="87" cy="106" rx="5" ry="7.5" fill="#2B2233"/>
+    <ellipse cx="113" cy="106" rx="5" ry="7.5" fill="#2B2233"/>
+    <circle cx="88.8" cy="102.5" r="1.8" fill="#fff"/><circle cx="114.8" cy="102.5" r="1.8" fill="#fff"/>
+    <ellipse cx="76" cy="119" rx="7" ry="4" fill="#FF7A6E" opacity=".45"/>
+    <ellipse cx="124" cy="119" rx="7" ry="4" fill="#FF7A6E" opacity=".45"/>
+    <path d="M95 120 Q100 125 105 120" fill="none" stroke="#2B2233" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+  <g id="acc-talk">
+    <rect x="132" y="20" width="58" height="38" rx="16" fill="#fff" stroke="#E3E6EA"/>
+    <path d="M146 56 l-6 12 l16 -10z" fill="#fff"/>
+    <circle cx="148" cy="39" r="4" fill="#8B97A0"/><circle cx="161" cy="39" r="4" fill="#8B97A0"/><circle cx="174" cy="39" r="4" fill="#8B97A0"/>
+  </g>
+</svg>
