@@ -86,8 +86,8 @@ h3 { line-height:1.35 }
 .row-head { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap }
 .row-head .sub { margin-bottom:0 }
 .grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) }
-.grid.prods { grid-template-columns:repeat(3,1fr) }
-@media (max-width:1100px) { .grid.prods { grid-template-columns:1fr 1fr } .grid.prods > .prod:nth-child(3) { grid-column:1 / -1; min-height:0 } }
+.grid.prods { grid-template-columns:repeat(2,1fr) }
+
 @media (max-width:700px) { .grid.prods { grid-template-columns:1fr } }
 .grid.two { grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr)) }
 .card { background:#fff; border:1px solid var(--line); border-radius:22px; padding:26px; transition:transform .25s, box-shadow .25s, border-color .25s }
@@ -125,6 +125,7 @@ a.card { text-decoration:none; display:block }
 .prod.tapa { background:linear-gradient(150deg,#FF5A4E 0%,#FF9A6B 100%); color:#fff }
 .prod.jeongi { background:#0D0E09; color:#fff; border:1px solid #2A2B1E }
 .prod.hurga { background:linear-gradient(150deg,#05625D 0%,#0B8C83 65%,#2BC4B0 100%); color:#fff }
+.prod.kalapit { background:linear-gradient(150deg,#3B1E8C 0%,#6B3FD4 65%,#9D7CF4 100%); color:#fff }
 .prod.jeongi::after { content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(245,230,20,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(245,230,20,.06) 1px, transparent 1px); background-size:28px 28px; pointer-events:none }
 .prod .top { display:flex; align-items:center; gap:14px; position:relative; z-index:1 }
 .prod .top img { width:64px; height:64px; border-radius:16px; box-shadow:0 10px 24px rgba(0,0,0,.25) }
@@ -214,7 +215,7 @@ footer p { margin:14px 0 0 }
 /* ── 스크롤하면 나타남 ── */
 .rv { opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1) }
 .rv.in { opacity:1; transform:none }
-.rv.d1 { transition-delay:.1s } .rv.d2 { transition-delay:.2s } .rv.d3 { transition-delay:.3s }
+.rv.d1 { transition-delay:.1s } .rv.d2 { transition-delay:.2s } .rv.d3 { transition-delay:.3s } .rv.d4 { transition-delay:.4s }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation:none !important; transition:none !important }
