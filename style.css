@@ -86,6 +86,9 @@ h3 { line-height:1.35 }
 .row-head { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap }
 .row-head .sub { margin-bottom:0 }
 .grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) }
+.grid.prods { grid-template-columns:repeat(3,1fr) }
+@media (max-width:1100px) { .grid.prods { grid-template-columns:1fr 1fr } .grid.prods > .prod:nth-child(3) { grid-column:1 / -1; min-height:0 } }
+@media (max-width:700px) { .grid.prods { grid-template-columns:1fr } }
 .grid.two { grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr)) }
 .card { background:#fff; border:1px solid var(--line); border-radius:22px; padding:26px; transition:transform .25s, box-shadow .25s, border-color .25s }
 .card:hover { transform:translateY(-4px); box-shadow:0 18px 40px rgba(21,23,28,.08); border-color:#d9dce2 }
@@ -143,10 +146,10 @@ a.card { text-decoration:none; display:block }
 .shots img { width:210px; flex:none; border-radius:18px; border:1px solid var(--line); scroll-snap-align:start }
 
 /* ── 숫자 띠 ── */
-.facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; border-top:1px solid rgba(255,255,255,.12); border-bottom:1px solid rgba(255,255,255,.12) }
-.facts div { padding:34px 24px; border-right:1px solid rgba(255,255,255,.12) }
-.facts div:last-child { border-right:0 }
-.facts .big { font-size:clamp(36px,4.4vw,58px); font-weight:800; line-height:1; color:var(--acc); white-space:nowrap }
+.facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:0; border-top:1px solid rgba(255,255,255,.12); border-bottom:1px solid rgba(255,255,255,.12) }
+.facts > div { padding:32px 18px; border-right:1px solid rgba(255,255,255,.12) }
+.facts > div:last-child { border-right:0 }
+.facts .big { font-size:clamp(34px,3.4vw,52px); font-weight:800; line-height:1; color:var(--acc); white-space:nowrap }
 .facts span { display:block; color:#B9BDC6; margin-top:10px; font-size:14.5px }
 
 /* ── 문의 띠 ── */
@@ -225,5 +228,5 @@ footer p { margin:14px 0 0 }
   .prod { min-height:0 }
   .bcard { min-height:340px }
   .cta { padding:44px 26px }
-  .facts div { border-right:0; border-bottom:1px solid rgba(255,255,255,.12) }
+  .facts > div { border-right:0; border-bottom:1px solid rgba(255,255,255,.12) }
 }
