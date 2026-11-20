@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TAPA TOPIK — Reset password</title>
+<!--
+  비밀번호 재설정 (모든 나라 앱·아이폰·PC 공용) — 메일 링크를 누르면 이 페이지에서 바로 새 비밀번호를 정함.
+  예전 dlabint.co.kr/reset-password 는 몽골 앱(com.tapa.korean://)으로만 돌아가서 다른 나라 앱은 끝까지 못 갔음.
+  받는 링크 형식 3가지 모두 처리: ?token=&email= (맞춤 메일 양식) / ?code= (PKCE) / #access_token= (기본 양식)
+  Supabase anon 키는 공개용 (앱에도 들어 있음).
+-->
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;background:#FFF5F2;color:#2d1210;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  .box{width:100%;max-width:400px;background:#fff;border-radius:24px;padding:32px 24px;box-shadow:0 12px 40px rgba(254,109,102,.15);text-align:center}
+  .logo{width:72px;height:72px;border-radius:20px;margin:0 auto 12px;display:block}
+  h1{font-size:20px;margin:0 0 6px}
+  p{font-size:15px;line-height:1.5;margin:8px 0;font-weight:600}
+  .err{color:#ef4444} .ok{color:#0EB37D}
+  input{width:100%;margin-top:12px;padding:14px 16px;border:2px solid #FFE1DC;border-radius:14px;font-size:16px;outline:none}
+  input:focus{border-color:#fe6d66}
+  button{width:100%;margin-top:16px;padding:15px;border:0;border-radius:14px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#fe6d66,#feaf7c);cursor:pointer}
+  button:disabled{opacity:.6}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="box">
+  <img class="logo" src="/img/icon.png" alt="" onerror="this.style.display='none'">
+  <h1>TAPA TOPIK</h1>
+  <p id="msg"></p>
+  <form id="form" class="hidden">
+    <input id="pw1" type="password" autocomplete="new-password" minlength="6" required>
+    <input id="pw2" type="password" autocomplete="new-password" minlength="6" required>
+    <button id="btn" type="submit"></button>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+var T = {
+  en: { checking: "Checking your reset link…", expired: "This link has expired. Please request a new one in the app.", invalid: "Invalid link. Please request a new one in the app.", title: "Enter your new password.", pw1: "New password (6+ characters)", pw2: "Confirm new password", save: "Change password", mismatch: "The passwords do not match.", short: "Use at least 6 characters.", done: "Your password has been changed! Go back to the app and log in with your new password.", fail: "Could not change the password: " },
+  ko: { checking: "재설정 링크 확인 중…", expired: "링크가 만료되었습니다. 앱에서 다시 요청해 주세요.", invalid: "잘못된 링크입니다. 앱에서 다시 요청해 주세요.", title: "새 비밀번호를 입력하세요.", pw1: "새 비밀번호 (6자 이상)", pw2: "새 비밀번호 확인", save: "비밀번호 변경", mismatch: "비밀번호가 서로 다릅니다.", short: "6자 이상 입력하세요.", done: "비밀번호가 바뀌었습니다! 앱으로 돌아가 새 비밀번호로 로그인하세요.", fail: "변경하지 못했습니다: " },
+  mn: { checking: "Холбоосыг шалгаж байна…", expired: "Холбоосын хугацаа дууссан. Апп-аас дахин хүсэлт илгээнэ үү.", invalid: "Буруу холбоос. Апп-аас дахин хүсэлт илгээнэ үү.", title: "Шинэ нууц үгээ оруулна уу.", pw1: "Шинэ нууц үг (6+ тэмдэгт)", pw2: "Шинэ нууц үг давтах", save: "Нууц үг солих", mismatch: "Нууц үг таарахгүй байна.", short: "Хамгийн багадаа 6 тэмдэгт.", done: "Нууц үг солигдлоо! Апп руу буцаж шинэ нууц үгээрээ нэвтэрнэ үү.", fail: "Солиж чадсангүй: " },
+  vi: { checking: "Đang kiểm tra liên kết…", expired: "Liên kết đã hết hạn. Vui lòng yêu cầu lại trong ứng dụng.", invalid: "Liên kết không hợp lệ. Vui lòng yêu cầu lại trong ứng dụng.", title: "Nhập mật khẩu mới.", pw1: "Mật khẩu mới (từ 6 ký tự)", pw2: "Nhập lại mật khẩu mới", save: "Đổi mật khẩu", mismatch: "Mật khẩu không khớp.", short: "Ít nhất 6 ký tự.", done: "Đã đổi mật khẩu! Hãy quay lại ứng dụng và đăng nhập bằng mật khẩu mới.", fail: "Không đổi được mật khẩu: " },
+  th: { checking: "กำลังตรวจสอบลิงก์…", expired: "ลิงก์หมดอายุแล้ว กรุณาขอใหม่ในแอป", invalid: "ลิงก์ไม่ถูกต้อง กรุณาขอใหม่ในแอป", title: "กรอกรหัสผ่านใหม่", pw1: "รหัสผ่านใหม่ (6 ตัวขึ้นไป)", pw2: "ยืนยันรหัสผ่านใหม่", save: "เปลี่ยนรหัสผ่าน", mismatch: "รหัสผ่านไม่ตรงกัน", short: "อย่างน้อย 6 ตัวอักษร", done: "เปลี่ยนรหัสผ่านแล้ว! กลับไปที่แอปแล้วเข้าสู่ระบบด้วยรหัสผ่านใหม่", fail: "เปลี่ยนรหัสผ่านไม่สำเร็จ: " },
+  id: { checking: "Memeriksa tautan…", expired: "Tautan sudah kedaluwarsa. Silakan minta lagi di aplikasi.", invalid: "Tautan tidak valid. Silakan minta lagi di aplikasi.", title: "Masukkan kata sandi baru.", pw1: "Kata sandi baru (min. 6 karakter)", pw2: "Ulangi kata sandi baru", save: "Ubah kata sandi", mismatch: "Kata sandi tidak cocok.", short: "Minimal 6 karakter.", done: "Kata sandi berhasil diubah! Kembali ke aplikasi dan masuk dengan kata sandi baru.", fail: "Gagal mengubah kata sandi: " },
+  ja: { checking: "リンクを確認しています…", expired: "リンクの有効期限が切れています。アプリでもう一度リクエストしてください。", invalid: "無効なリンクです。アプリでもう一度リクエストしてください。", title: "新しいパスワードを入力してください。", pw1: "新しいパスワード（6文字以上）", pw2: "新しいパスワード（確認）", save: "パスワードを変更", mismatch: "パスワードが一致しません。", short: "6文字以上で入力してください。", done: "パスワードを変更しました！アプリに戻って新しいパスワードでログインしてください。", fail: "変更できませんでした: " },
+  zh: { checking: "正在验证链接…", expired: "链接已过期，请在应用中重新申请。", invalid: "链接无效，请在应用中重新申请。", title: "请输入新密码。", pw1: "新密码（至少6位）", pw2: "确认新密码", save: "修改密码", mismatch: "两次输入的密码不一致。", short: "至少6位。", done: "密码已修改！请返回应用，用新密码登录。", fail: "修改失败：" },
+  uk: { checking: "Перевіряємо посилання…", expired: "Термін дії посилання минув. Надішліть запит ще раз у застосунку.", invalid: "Недійсне посилання. Надішліть запит ще раз у застосунку.", title: "Введіть новий пароль.", pw1: "Новий пароль (від 6 символів)", pw2: "Повторіть новий пароль", save: "Змінити пароль", mismatch: "Паролі не збігаються.", short: "Щонайменше 6 символів.", done: "Пароль змінено! Поверніться в застосунок і увійдіть з новим паролем.", fail: "Не вдалося змінити пароль: " },
+  uz: { checking: "Havola tekshirilmoqda…", expired: "Havola muddati tugagan. Ilovada qayta so‘rang.", invalid: "Noto‘g‘ri havola. Ilovada qayta so‘rang.", title: "Yangi parolni kiriting.", pw1: "Yangi parol (kamida 6 belgi)", pw2: "Yangi parolni takrorlang", save: "Parolni o‘zgartirish", mismatch: "Parollar mos emas.", short: "Kamida 6 belgi.", done: "Parol o‘zgartirildi! Ilovaga qaytib, yangi parol bilan kiring.", fail: "O‘zgartirib bo‘lmadi: " },
+  tl: { checking: "Sinusuri ang link…", expired: "Expired na ang link. Humiling muli sa app.", invalid: "Hindi wasto ang link. Humiling muli sa app.", title: "Ilagay ang bagong password.", pw1: "Bagong password (6+ na character)", pw2: "Ulitin ang bagong password", save: "Palitan ang password", mismatch: "Hindi magkatugma ang mga password.", short: "Hindi bababa sa 6 na character.", done: "Napalitan na ang password! Bumalik sa app at mag-log in gamit ang bagong password.", fail: "Hindi napalitan: " }
+};
+var langs = (navigator.languages || [navigator.language || "en"]).map(function (l) { l = String(l).toLowerCase(); return l === "fil" || l.indexOf("fil-") === 0 ? "tl" : l.split("-")[0]; });
+var L = T.en; for (var i = 0; i < langs.length; i++) if (T[langs[i]]) { L = T[langs[i]]; document.documentElement.lang = langs[i]; break; }
+
+var msg = document.getElementById("msg"), form = document.getElementById("form"), btn = document.getElementById("btn");
+document.getElementById("pw1").placeholder = L.pw1; document.getElementById("pw2").placeholder = L.pw2; btn.textContent = L.save;
+function say(text, cls) { msg.textContent = text; msg.className = cls || ""; }
+say(L.checking);
+
+var client = supabase.createClient(
+  "https://zlzteilnrjpyhvvbmnnq.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsenRlaWxucmpweWh2dmJtbm5xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1NDAyNzMsImV4cCI6MjA5MjExNjI3M30.55UjvNVyVvdXcB-M7Q1WVnbTdteVIVj9lmjckCxqfYI",
+  { auth: { persistSession: false, detectSessionInUrl: false, autoRefreshToken: false } }
+);
+var q = new URLSearchParams(location.search), h = new URLSearchParams(location.hash.replace(/^#/, ""));
+
+function start() {
+  if (q.get("error") || h.get("error")) return Promise.reject("expired");
+  if (q.get("token") && q.get("email")) return client.auth.verifyOtp({ email: q.get("email"), token: q.get("token"), type: "recovery" });
+  if (q.get("token_hash")) return client.auth.verifyOtp({ token_hash: q.get("token_hash"), type: "recovery" });
+  if (q.get("code")) return client.auth.exchangeCodeForSession(q.get("code"));
+  if (h.get("access_token") && h.get("refresh_token")) return client.auth.setSession({ access_token: h.get("access_token"), refresh_token: h.get("refresh_token") });
+  return Promise.reject("invalid");
+}
+start().then(function (r) {
+  if (r.error || !r.data || !r.data.session) throw "expired";
+  history.replaceState(null, "", location.pathname); // 주소창에서 토큰 지우기
+  say(L.title); form.classList.remove("hidden"); document.getElementById("pw1").focus();
+}).catch(function (e) { say(e === "invalid" ? L.invalid : L.expired, "err"); });
+
+form.addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  var a = document.getElementById("pw1").value, b = document.getElementById("pw2").value;
+  if (a.length < 6) return say(L.short, "err");
+  if (a !== b) return say(L.mismatch, "err");
+  btn.disabled = true;
+  client.auth.updateUser({ password: a }).then(function (r) {
+    if (r.error) { btn.disabled = false; return say(L.fail + r.error.message, "err"); }
+    form.classList.add("hidden"); say(L.done, "ok");
+    client.auth.signOut();
+  });
+});
+</script>
+</body>
+</html>
